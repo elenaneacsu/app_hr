@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace app_hr
 {
@@ -26,6 +27,19 @@ namespace app_hr
 
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
+        }
+
+        //write to text file
+        private void write(string idP, string nume, string salariu, string departament, string idJ, string denumireJ, string tip)
+        {
+            string[] array = { idP, nume, salariu, departament, idJ, denumireJ, tip };
+            using (StreamWriter writer = new StreamWriter(@"persoane.txt", true))
+            {
+                for (int i = 0; i < array.Length; i++)
+                    writer.Write(array[i]+" ");
+                writer.Write(DateTime.Now);
+                writer.Write(Environment.NewLine);
+            }
         }
 
         //insert into db
@@ -87,6 +101,8 @@ namespace app_hr
                 }
                 Persoana pers = new Persoana(idP, nume, salariu, dep, new Job(idJ, denumireJ, tip));
                 listaPers.Add(pers);
+
+                write(textBox1.Text, textBox2.Text, textBox3.Text, tbDep.Text, textBox4.Text, textBox5.Text, tip.ToString());
 
                 addDb(idP, nume, salariu, dep, idJ, denumireJ, tip);
 
@@ -226,6 +242,8 @@ namespace app_hr
                 con.Close();
                 retrieve();
             }
+
+            write(idP.ToString(), nume, salariu.ToString(), departament, idJ.ToString(), denumireJ, tip.ToString());
         }
 
         //editare

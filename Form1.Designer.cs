@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listView1 = new System.Windows.Forms.ListView();
             this.IdDep = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DenumireDep = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.persoaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adaugareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vizualizareGraficaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.joburiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adaugareToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -44,6 +46,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +91,8 @@
             // persoaneToolStripMenuItem
             // 
             this.persoaneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adaugareToolStripMenuItem});
+            this.adaugareToolStripMenuItem,
+            this.vizualizareGraficaToolStripMenuItem});
             this.persoaneToolStripMenuItem.Name = "persoaneToolStripMenuItem";
             this.persoaneToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
             this.persoaneToolStripMenuItem.Text = "Persoane";
@@ -94,9 +100,16 @@
             // adaugareToolStripMenuItem
             // 
             this.adaugareToolStripMenuItem.Name = "adaugareToolStripMenuItem";
-            this.adaugareToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.adaugareToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.adaugareToolStripMenuItem.Text = "Mod Editare";
             this.adaugareToolStripMenuItem.Click += new System.EventHandler(this.adaugareToolStripMenuItem_Click);
+            // 
+            // vizualizareGraficaToolStripMenuItem
+            // 
+            this.vizualizareGraficaToolStripMenuItem.Name = "vizualizareGraficaToolStripMenuItem";
+            this.vizualizareGraficaToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.vizualizareGraficaToolStripMenuItem.Text = "Vizualizare Grafica";
+            this.vizualizareGraficaToolStripMenuItem.Click += new System.EventHandler(this.vizualizareGraficaToolStripMenuItem_Click);
             // 
             // joburiToolStripMenuItem
             // 
@@ -109,7 +122,7 @@
             // adaugareToolStripMenuItem1
             // 
             this.adaugareToolStripMenuItem1.Name = "adaugareToolStripMenuItem1";
-            this.adaugareToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.adaugareToolStripMenuItem1.Size = new System.Drawing.Size(166, 26);
             this.adaugareToolStripMenuItem1.Text = "Mod Editare";
             this.adaugareToolStripMenuItem1.Click += new System.EventHandler(this.adaugareToolStripMenuItem1_Click);
             // 
@@ -185,11 +198,37 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(525, 533);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(110, 42);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "Print";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 615);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -201,7 +240,9 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -228,6 +269,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ToolStripMenuItem vizualizareGraficaToolStripMenuItem;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Button button5;
     }
 }
 

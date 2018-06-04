@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace app_hr
 {
@@ -24,6 +25,18 @@ namespace app_hr
             InitializeComponent();
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
+        }
+
+        private void write(string idDep, string denumire)
+        {
+            string[] array = { idDep, denumire };
+            using(StreamWriter writer = new StreamWriter(@"departamente.txt", true))
+            {
+                for (int i = 0; i < array.Length; i++)
+                    writer.Write(array[i] + " ");
+                writer.Write(DateTime.Now);
+                writer.Write(Environment.NewLine);
+            }
         }
 
         private void adaugareToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,6 +98,7 @@ namespace app_hr
                 idDep = Convert.ToInt32(textBox1.Text);
                 string denumire = textBox2.Text;
                 addDb(idDep, denumire);
+                write(idDep.ToString(), denumire);
             } catch(Exception ex)
             {
                 MessageBox.Show("Id-ul nu poate contine litere!");
@@ -157,6 +171,7 @@ namespace app_hr
                 con.Close();
                 retrieve();
             }
+            write(idDep.ToString(), denumire);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -214,6 +229,27 @@ namespace app_hr
             textBox2.Text = "";
         }
 
-        
+        private void vizualizareGraficaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(bmp, 0, 0);
+        }
+
+        Bitmap bmp;
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+            bmp = new Bitmap(this.Size.Width, this.Size.Height, g);
+            Graphics mg = Graphics.FromImage(bmp);
+            mg.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, this.Size);
+            printPreviewDialog1.ShowDialog();
+        }
+
     }
 }

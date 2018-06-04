@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace app_hr
 {
@@ -37,6 +38,20 @@ namespace app_hr
             else
             {
                 radioButton2.Checked = true;
+            }
+        }
+
+        private void write(string idJ, string denumire, string tip)
+        {
+            string[] array = { idJ, denumire, tip };
+            using(StreamWriter writer = new StreamWriter(@"joburi.txt", true))
+            {
+                for(int i = 0; i < array.Length; i++)
+                {
+                    writer.Write(array[i] + " ");
+                }
+                writer.Write(DateTime.Now);
+                writer.Write(Environment.NewLine);
             }
         }
 
@@ -126,6 +141,7 @@ namespace app_hr
                     tip = false;
                 }
                 add(idJ, denumire, tip);
+                write(idJ.ToString(), denumire, tip.ToString());
             } catch(Exception ex)
             {
                 MessageBox.Show("Id-ul nu poate contine litere!");
@@ -172,6 +188,7 @@ namespace app_hr
                 con.Close();
                 retrieve();
             }
+            write(idJ.ToString(), denumire, tip.ToString());
         }
 
         private void button3_Click(object sender, EventArgs e)
